@@ -153,7 +153,9 @@ interface XRRay {
 };
 
 [SecureContext, Exposed=Window] interface XRViewerPose : XRPose {
-  [SameObject] readonly attribute FrozenArray<XRView> views;
+  // TODO: Use FrozenArray once available. (Bug 1236777)
+  // [SameObject] readonly attribute FrozenArray<XRView> views;
+  [SameObject, Frozen, Cached, Pure] readonly attribute sequence<XRView> views;
 };
 
 enum XRHandedness {
@@ -204,19 +206,21 @@ interface XRWebGLLayer : XRLayer {
   // Attributes
   [SameObject] readonly attribute XRWebGLRenderingContext context;
 
-  readonly attribute boolean antialias;
-  readonly attribute boolean ignoreDepthValues;
+  // TODO: Had to disable non-SameObject attributes and methods to get bindings
+  // (but not sure which of the two is causing problems)
+  //readonly attribute boolean antialias;
+  //readonly attribute boolean ignoreDepthValues;
 
   [SameObject] readonly attribute WebGLFramebuffer framebuffer;
-  readonly attribute unsigned long framebufferWidth;
-  readonly attribute unsigned long framebufferHeight;
+  //readonly attribute unsigned long framebufferWidth;
+  //readonly attribute unsigned long framebufferHeight;
 
   // Methods
-  XRViewport? getViewport(XRView view);
-  void requestViewportScaling(double viewportScaleFactor);
+  //XRViewport? getViewport(XRView view);
+  //void requestViewportScaling(double viewportScaleFactor);
 
   // Static Methods
-  static double getNativeFramebufferScaleFactor(XRSession session);
+  //static double getNativeFramebufferScaleFactor(XRSession session);
 };
 
 partial dictionary WebGLContextAttributes {

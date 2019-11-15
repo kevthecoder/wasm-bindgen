@@ -3,6 +3,9 @@
     "build": "webpack",
     "serve": "webpack-dev-server"
   },
+  "dependencies": {
+    "webxr": "./pkg"
+  },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "1.0.1",
     "text-encoding": "^0.7.0",
